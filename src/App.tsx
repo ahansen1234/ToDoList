@@ -1,24 +1,80 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useState, useCallback } from "react";
+import Display from "./Display";
+
+export interface Itask {
+  task: string;
+  id: string;
+  deadline: number;
+}
 
 function App() {
+  const [task, setTask] = useState<string>();
+  const [list, setList] = useState<Itask[]>([]);
+  const [deadline, setDeadline] = useState<number>(0);
+
+  const handleChange = useCallback((e: any) => {
+    setTask(e.target.value);
+  }, []);
+
+  const handleDeadline = useCallback((e: any) => {
+    setDeadline(e.target.value);
+  }, []);
+
+  const handleClick = useCallback(() => {
+    setList([
+      ...list,
+      { task: task!, deadline: deadline, id: task! + Math.random() },
+    ]);
+    setTask("");
+    setDeadline(0);
+  }, [list, task, deadline]);
+
+  const handleDelete = useCallback(
+    (index: number) => {
+      list.splice(index, 1);
+      setList([...list]);
+    },
+    [list]
+  );
+
+  const addTime = useCallback(
+    (task: Itask) => {
+      task.deadline = task.deadline + 1;
+      setList([...list]);
+    },
+    [list]
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="All">
+      <div className="App">
+        <h1> Create a To Do List!</h1>
+        <input
+          type="text"
+          title="To Do Item"
+          value={task}
+          placeholder="Add a Task!"
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          onChange={handleDeadline}
+          placeholder="Add a Deadline!"
+          value={deadline}
+          title="Deadline (days)"
+        />
+        <button onClick={handleClick}> Add to List!</button>
+        <Display list={list} handleDelete={handleDelete} addTime={addTime} />
+      </div>
+      <div className="Notes">
+        <text>
+          {" "}
+          If you have one or less days remaining until the deadline, this list
+          will warn you by displaying the task red
+        </text>
+      </div>
     </div>
   );
 }
