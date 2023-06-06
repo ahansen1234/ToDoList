@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import { useState, useCallback } from "react";
 import Display from "./Display";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 
 export interface Itask {
   task: string;
@@ -50,7 +52,14 @@ function App() {
   return (
     <div className="All">
       <div className="App">
-        <h1> Create a To Do List!</h1>
+        <div>
+          <h1 className="Title">
+            {" "}
+            Create a To Do List!{" "}
+            <FontAwesomeIcon icon={faListCheck} size="sm" />
+          </h1>
+        </div>
+
         <input
           type="text"
           title="To Do Item"

@@ -2,7 +2,24 @@
   text-align: center;
   padding: 8px;
 }
-.All{
+.Title {
+  text-align: center;
+  padding: 8px;
+  display: inline;
+}
+
+
+.Icon{
+  display: inline;
+}
+.App:before {
+  content:"";
+  background-color:#f3f3ee;
+  position: absolute;
+  height: 100%;
+  width: 4000px;
+  left: -2000px;
+  z-index: -1;
 }
 .Late{
   text-align: center;
