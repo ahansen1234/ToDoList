@@ -12,7 +12,7 @@
 .Icon{
   display: inline;
 }
-.App:before {
+.All:before {
   content:"";
   background-color:#f3f3ee;
   position: absolute;
