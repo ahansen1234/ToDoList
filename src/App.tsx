@@ -43,7 +43,7 @@ function App() {
 
   const addTime = useCallback(
     (task: Itask) => {
-      task.deadline = task.deadline + 1;
+      task.deadline++;
       setList([...list]);
     },
     [list]
