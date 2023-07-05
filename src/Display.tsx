@@ -15,7 +15,8 @@ export default function Display(props: IdisplayProps) {
           {props.list.map((task: Itask, index: number) => {
             return (
               <div key={task.id} className={task.deadline > 1 ? "App" : "Late"}>
-                {task.task} needs to be done in {task.deadline} days!
+                {task.task} needs to be done in {task.deadline}{" "}
+                {task.deadline > 1 ? "days" : "day"}!
                 <button onClick={(e: any) => props.addTime(task)}>
                   {" "}
                   Add one Day
